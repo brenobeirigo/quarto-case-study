@@ -7,7 +7,7 @@ or a higher level.
 
 The heading keeps its identifier, table-of-contents entry, and cross-reference
 target. HTML output uses a semantic section with a subtle background, a thin
-border, and a 4 px accent rule. PDF output uses a breakable `tcolorbox`.
+border, and a 4 px accent rule. Non-HTML formats pass through unchanged.
 
 ## Install
 
@@ -69,23 +69,20 @@ to `#6f2da8`. A case can override either value on its heading:
 and after the case, a nested subsection, a table, and a cross-reference to the
 case heading.
 
-Render both supported formats with:
+Render the example with:
 
 ```bash
 quarto render example.qmd --to html
-quarto render example.qmd --to pdf
 ```
 
-The styled treatment supports Quarto HTML and PDF output. Other output formats
-keep their ordinary headings and content. PDF rendering requires a LaTeX
-installation with `tcolorbox`; Quarto TinyTeX installs the package when needed.
+The styled treatment supports Quarto HTML output. Other output formats keep
+their ordinary headings and content.
 
 ## Test
 
 The render-contract tests create a disposable Quarto project. They confirm
 that the complete section is boxed, the following section remains outside,
-the stable heading identifier resolves, the stylesheet loads, and the PDF is
-produced.
+the stable heading identifier resolves, and the stylesheet loads.
 
 ```bash
 python -m unittest discover -s tests -v

@@ -3,8 +3,6 @@ title: "Case study extension example"
 format:
   html:
     toc: true
-  pdf:
-    toc: true
 number-sections: true
 case-study:
   label: "CASE STUDY"

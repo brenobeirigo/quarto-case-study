@@ -15,10 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run HTML and PDF render-contract tests
+      - name: Run HTML render-contract tests
         run: python -m unittest discover -s tests -v
