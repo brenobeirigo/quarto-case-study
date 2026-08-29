@@ -113,6 +113,23 @@ class RenderContractTests(unittest.TestCase):
         self.assertGreater(pdf.stat().st_size, 10_000)
         self.assertEqual(pdf.read_bytes()[:4], b"%PDF")
 
+    def test_pdf_coexists_with_an_ordinary_quarto_callout(self):
+        fixture = REPOSITORY / "tests" / "fixtures" / "callout-and-case.qmd"
+        shutil.copy2(fixture, self.project / fixture.name)
+        result = subprocess.run(
+            ["quarto", "render", fixture.name, "--to", "pdf"],
+            cwd=self.project,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+        pdf = self.project / "callout-and-case.pdf"
+        self.assertTrue(pdf.exists())
+        self.assertGreater(pdf.stat().st_size, 10_000)
+        self.assertEqual(pdf.read_bytes()[:4], b"%PDF")
+
 
 if __name__ == "__main__":
     unittest.main()

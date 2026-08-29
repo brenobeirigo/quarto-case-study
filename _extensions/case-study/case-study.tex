@@ -1,4 +1,7 @@
-\usepackage[most]{tcolorbox}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage{tcolorbox}}
+\makeatother
+\tcbuselibrary{breakable,skins}
 
 \newenvironment{caseStudyBox}[1]{%
   \definecolor{caseStudyAccent}{HTML}{#1}%
