@@ -1,0 +1,45 @@
+---
+title: "Case study extension example"
+format:
+  html:
+    toc: true
+  pdf:
+    toc: true
+number-sections: true
+case-study:
+  label: "CASE STUDY"
+  accent: "#6f2da8"
+filters:
+  - case-study
+---
+
+Case studies need a visible beginning and end. The extension places a complete
+section inside one box while keeping its heading available to the table of
+contents and cross-references.
+
+## Before the case
+
+The paragraph before the marked heading remains outside the box. See
+@sec-factory-schedule for the complete example.
+
+## Formulating a factory schedule {#sec-factory-schedule .case-study}
+
+A small factory must complete two orders using one cutting machine and one
+finishing machine. Each machine can process one order at a time.
+
+| Order | Cut | Finish | Required order |
+|---|---:|---:|---|
+| A | 2 hours | 1 hour | Cut, then finish |
+| B | 1 hour | 2 hours | Finish, then cut |
+
+The scheduling problem records the steps, durations, ordering rules, and
+machine capacity. The time when both orders are complete is the *makespan*.
+
+### A question for later
+
+How would the schedule change if Order A needed two hours on the finishing
+machine?
+
+## After the case {#sec-after-case}
+
+This paragraph starts a new section, so it is outside the case-study box.
