@@ -84,7 +84,7 @@ function Pandoc(document)
   if quarto.doc.is_format("html") or FORMAT:match("html") then
     quarto.doc.add_html_dependency({
       name = "quarto-case-study",
-      version = "0.2.0",
+      version = "0.2.1",
       stylesheets = {"case-study.css"}
     })
     document.blocks = decorate_html_cases(document.blocks, document.meta)
