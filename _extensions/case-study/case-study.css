@@ -1,9 +1,9 @@
 section.case-study {
   --case-study-accent: #6f2da8;
-  background: #fbfafc;
-  background: color-mix(in srgb, var(--case-study-accent) 5%, white);
-  border: 1px solid #b9b2be;
-  border-color: color-mix(in srgb, var(--case-study-accent) 36%, #8a8a8a);
+  background: var(--paper, #fff);
+  background: color-mix(in srgb, var(--case-study-accent) 5%, var(--paper, #fff));
+  border: 1px solid var(--line, #dfe3e1);
+  border-color: color-mix(in srgb, var(--case-study-accent) 28%, var(--line, #dfe3e1));
   border-left: 4px solid var(--case-study-accent);
   border-radius: 0.5rem;
   margin: 1.75rem 0;
@@ -13,7 +13,7 @@ section.case-study {
 
 section.case-study > .case-study-label {
   color: #4f2a63;
-  color: color-mix(in srgb, var(--case-study-accent) 72%, black);
+  color: var(--accent-strong, color-mix(in srgb, var(--case-study-accent) 72%, var(--ink, #111)));
   font-size: 0.73rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -27,7 +27,7 @@ section.case-study > .case-study-label {
 
 section.case-study > :is(h1, h2, h3, h4, h5, h6) {
   color: #3e214d;
-  color: color-mix(in srgb, var(--case-study-accent) 68%, black);
+  color: var(--accent-strong, color-mix(in srgb, var(--case-study-accent) 68%, var(--ink, #111)));
   margin-top: 0.2rem;
   padding-top: 0;
 }
