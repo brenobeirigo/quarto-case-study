@@ -1,5 +1,4 @@
 local DEFAULT_LABEL = "CASE STUDY"
-local DEFAULT_ACCENT = "6F2DA8"
 
 local function has_class(element, class_name)
   for _, class in ipairs(element.classes) do
@@ -23,12 +22,12 @@ local function metadata_string(value, fallback)
   return text
 end
 
-local function normalize_accent(value, fallback)
-  local candidate = metadata_string(value, fallback)
+local function normalize_accent(value)
+  local candidate = metadata_string(value, "")
   local hexadecimal = candidate:match("^#?([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])$")
 
   if hexadecimal == nil then
-    return fallback
+    return nil
   end
 
   return hexadecimal:upper()
@@ -37,14 +36,14 @@ end
 local function case_options(meta, header)
   local config = meta["case-study"] or {}
   local label = metadata_string(config.label, DEFAULT_LABEL)
-  local accent = normalize_accent(config.accent, DEFAULT_ACCENT)
+  local accent = normalize_accent(config.accent)
 
   if header.attributes["data-label"] ~= nil then
     label = metadata_string(header.attributes["data-label"], label)
   end
 
   if header.attributes["data-accent"] ~= nil then
-    accent = normalize_accent(header.attributes["data-accent"], accent)
+    accent = normalize_accent(header.attributes["data-accent"])
   end
 
   return label, accent
@@ -67,7 +66,9 @@ local function decorate_html_cases(blocks, meta)
     if block.t == "Header" and has_class(block, "case-study") then
       local label, accent = case_options(meta, block)
       block.attributes["data-case-study-label"] = label
-      add_style(block, "--case-study-accent: #" .. accent .. ";")
+      if accent ~= nil then
+        add_style(block, "--case-study-accent: #" .. accent .. ";")
+      end
       output:insert(
         pandoc.Div(
           {pandoc.Plain({pandoc.Str(label)})},
@@ -84,7 +85,7 @@ function Pandoc(document)
   if quarto.doc.is_format("html") or FORMAT:match("html") then
     quarto.doc.add_html_dependency({
       name = "quarto-case-study",
-      version = "0.2.2",
+      version = "0.3.0",
       stylesheets = {"case-study.css"}
     })
     document.blocks = decorate_html_cases(document.blocks, document.meta)
